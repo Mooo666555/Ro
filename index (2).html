@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosanna Wedding Halls</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1s ease-in-out;
+        }
+
+        .hidden {
+            transform: translateX(100%);
+        }
+
+        #login-page {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        #login-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #login-form input {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        #login-form button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background 0.3s;
+        }
+
+        #login-form button:hover {
+            background: #218838;
+        }
+
+        #chat-page, #booking-page {
+            flex-direction: column;
+            display: none;
+            width: 100%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
+            background: rgba(128, 128, 128, 0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        #user-button {
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+        }
+
+        #user-info {
+            display: none;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            color: black;
+        }
+
+        #user-info p {
+            margin: 5px 0;
+        }
+
+        #add-number {
+            margin: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #add-number-btn {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: background 0.3s;
+        }
+
+        #add-number-btn:hover {
+            background: #0056b3;
+        }
+
+        #user-number {
+            display: none;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 80%;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #confirm-number {
+            display: none;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #confirm-number:hover {
+            background: #0056b3;
+        }
+
+        #call-chief {
+            display: none;
+            background: rgba(255, 255, 255, 0.3);
+            color: #333;
+            border: none;
+            padding: 15px;
+            width: 90%;
+            height: 10%;
+            margin: 20px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        #call-chief:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        #chat-box {
+            display: flex;
+            align-items: center;
+            margin: 20px;
+            width: 90%;
+        }
+
+        #chat-box input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        #chat-box button {
+            padding: 10px;
+            cursor: pointer;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        #chat-box button:hover {
+            background: #0056b3;
+        }
+
+        h1.decorated {
+            text-align: center;
+            font-size: 2em;
+            color: #1e90ff;
+            text-shadow: 1px 1px 2px #000;
+            margin-top: 0;
+            background: rgba(128, 128, 128, 0.8);
+            width: 100%;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            margin: auto;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .message-box input {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="login-page" class="page">
+        <form id="login-form">
+            <h1 class="decorated">Login</h1>
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div id="chat-page" class="page hidden">
+        <header>
+            <h1 class="decorated">Chat with Owner</h1>
+            <button id="user-button"></button>
+        </header>
+        <div id="user-info">
+            <p id="user-name"></p>
+            <p id="user-email"></p>
+        </div>
+        <div id="add-number">
+            <button id="add-number-btn">Add Number</button>
+            <input type="text" id="user-number" placeholder="Enter user number">
+            <button id="confirm-number">Confirm</button>
+            <button id="call-chief">Call Chief Reservations Officer</button>
+        </div>
+        <div id="chat-box" class="message-box">
+            <input type="text" id="booking-message" placeholder="Enter your question or inquiry">
+            <button id="send-booking-message">Send</button>
+        </div>
+    </div>
+    <div id="booking-page" class="page hidden">
+        <h1 class="decorated">Chat with Chief Reservations Officer</h1>
+        <div id="chat-box" class="message-box">
+            <input type="text" id="booking-message" placeholder="Enter your question or inquiry">
+            <button id="send-booking-message">Send</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loginForm = document.getElementById('login-form');
+            const loginPage = document.getElementById('login-page');
+            const chatPage = document.getElementById('chat-page');
+            const bookingPage = document.getElementById('booking-page');
+            const userButton = document.getElementById('user-button');
+            const userInfo = document.getElementById('user-info');
+            const addNumberBtn = document.getElementById('add-number-btn');
+            const userNumberInput = document.getElementById('user-number');
+            const confirmNumber = document.getElementById('confirm-number');
+            const callChief = document.getElementById('call-chief');
+            const sendMessageBtn = document.getElementById('send-booking-message');
+
+            // التعامل مع تسجيل الدخول
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+
+                // إظهار معلومات المستخدم في صفحة الدردشة
+                document.getElementById('user-name').innerText = `Name: ${name}`;
+                document.getElementById('user-email').innerText = `Email: ${email}`;
+                userButton.innerText = name.charAt(0).toUpperCase();
+
+                // الانتقال إلى صفحة الدردشة
+                loginPage.classList.add('hidden');
+                chatPage.style.display = 'flex';
+                setTimeout(() => {
+                    chatPage.classList.remove('hidden');
+                }, 10);
+            });
+
+            // التعامل مع زر المستخدم
+            userButton.addEventListener('click', function() {
+                userInfo.style.display = userInfo.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // التعامل مع إضافة رقم المستخدم
+            addNumberBtn.addEventListener('click', function() {
+                userNumberInput.style.display = 'block';
+                confirmNumber.style.display = 'block';
+                addNumberBtn.style.display = 'none';
+            });
+
+            // تأكيد رقم المستخدم
+            confirmNumber.addEventListener('click', function() {
+                userNumberInput.style.display = 'none';
+                confirmNumber.style.display = 'none';
+                callChief.style.display = 'block';
+            });
+
+            // الانتقال إلى صفحة الدردشة مع مسؤول الحجوزات
+            callChief.addEventListener('click', function() {
+                chatPage.classList.add('hidden');
+                setTimeout(() => {
+                    chatPage.style.display = 'none';
+                    bookingPage.style.display = 'flex';
+                    setTimeout(() => {
+                        bookingPage.classList.remove('hidden');
+                    }, 10);
+                }, 1000);
+            });
+
+            // إرسال رسالة الدردشة
+            sendMessageBtn.addEventListener('click', function() {
+                const message = document.getElementById('booking-message').value;
+                alert(`Message sent: ${message}`);
+            });
+        });
+    </script>
+</body>
+</html>
